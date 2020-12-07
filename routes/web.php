@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\TweetsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('index');
+Route::view('/', 'index');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('tweets', TweetsController::class);
 });
 
-Route::get('login/twitter', [LoginController::class, 'redirectToProvider']);
+Route::get('login/twitter', [LoginController::class, 'redirectToProvider'])->name('login');
 Route::get('login/twitter/callback', [LoginController::class, 'handleProviderCallback']);
+
+Route::delete('logout', LogoutController::class);

@@ -33,7 +33,11 @@ return [
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => 'https://twitter.test/auth/twitter',
+        'redirect' => env('TWITTER_CALLBACK_URL', 'https://twitter.test/login/twitter/callback'),
+        'access_token' => 'foo',
+        'access_secret' => 'foo',
+        'consumer_key' => env('TWITTER_CLIENT_ID'),
+        'consumer_secret' => env('TWITTER_CLIENT_SECRET'),
     ],
 
 ];
